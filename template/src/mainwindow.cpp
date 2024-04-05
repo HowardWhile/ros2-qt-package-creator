@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
-#include <iostream>
 #include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
@@ -19,19 +18,19 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     // -------------------------------------
     // ROS publisher
     // -------------------------------------
-    this->publisher_ = this->node_->create_publisher<std_msgs::msg::String>("qt_pub_topic", 10);
+    this->publisher_ = this->node_->create_publisher<std_msgs::msg::String>("ros2qt_pub", 10);
 
     // -------------------------------------
     // ROS subscriber
     // -------------------------------------
     this->subscriber_ = node_->create_subscription<std_msgs::msg::String>(
-        "sub_topic", 10,
+        "ros2qt_sub", 10,
         [&](const std_msgs::msg::String::SharedPtr msg)
         {
             // Handle received message
             QString receivedMsg = QString::fromStdString(msg->data);
             std::cout << msg->data << std::endl;
-            ui->textBrowser->append(receivedMsg);
+            ui->tbox_sub_info->append(receivedMsg);
         });
 
     // -------------------------------------
@@ -63,14 +62,16 @@ void MainWindow::initSpin(void)
     this->spin_timer_.start();
 }
 
-void MainWindow::on_pushButton_clicked()
+
+void MainWindow::on_btn_pub_clicked()
 {
-    QString text = ui->lineEdit->text();
-    std::cout << text.toStdString() << std::endl;
+    std::string text = ui->tbox_pub_msg->text().toStdString();
+    RCLCPP_INFO(this->node_->get_logger(), "Publish message: %s", text.c_str() );
 
     std_msgs::msg::String msg;
-    msg.data = text.toStdString();
+    msg.data = text;
 
     // Publish the ROS message
     publisher_->publish(msg);
 }
+
