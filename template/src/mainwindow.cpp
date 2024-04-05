@@ -29,7 +29,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         {
             // Handle received message
             QString receivedMsg = QString::fromStdString(msg->data);
-            std::cout << msg->data << std::endl;
+            RCLCPP_INFO(this->node_->get_logger(), "Subscribe message: %s", msg->data.c_str() );
             ui->tbox_sub_info->append(receivedMsg);
         });
 
