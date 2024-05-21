@@ -15,7 +15,7 @@ source ros2-qt-package-creator/setup.bash
 ```
 
 ```shell
-create-new-ros-qt-package <PKG_NAME> <NODE_NAME>
+create-new-ros-qt-widget-package <PKG_NAME> <NODE_NAME>
 ```
 
 
@@ -31,8 +31,8 @@ source ~/Downloads/ros2-qt-package-creator/setup.bash
 #cd <src folder of your ROS workspace>
 cd ~/ros2_ws/src
 
-#create-new-ros-qt-package <PKG_NAME> <NODE_NAME>
-create-new-ros-qt-package my_ros2qt ui
+#create-new-ros-qt-widget-package <PKG_NAME> <NODE_NAME>
+create-new-ros-qt-widget-package my_ros2qt ui
 ```
 
 #### **Compile and Run**
