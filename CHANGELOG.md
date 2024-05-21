@@ -5,7 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1] - 2024-05-21
 
+### Added
+`create-new-ros-qt-console-package`
+
+### Changed
+`create-new-ros-qt-package` to `create-new-ros-qt-widget-package`
 
 ## [1.0] - 2024-04-05
 
