@@ -17,12 +17,19 @@ MainNode::MainNode()
     // -------------------------------------
     // WorkLoop Example
     // -------------------------------------
-    // Initialize spinning with a timer interval of 500ms
-    this->workloop_timer_.setInterval(500);
+    // Initialize spinning with a timer interval of 1000ms
+    this->workloop_timer_.setInterval(1000);
     QObject::connect(&this->workloop_timer_, &QTimer::timeout, this, &MainNode::workloop_timer_callback);
     this->workloop_timer_.start();
     // -------------------------------------
+
+    std::string node_name = this->node_->get_name();
+
+    RCLCPP_INFO(this->node_->get_logger(), "MainMode Initialized Node Name: %s", node_name.c_str() );
+
     this->initSpin();
+    // -------------------------------------
+
 }
 
 MainNode::~MainNode()
@@ -51,7 +58,7 @@ void MainNode::initSpin()
 
 void MainNode::subscription_callback(std_msgs::msg::String::UniquePtr msg)
 {
-    RCLCPP_INFO(this->node_->get_logger(), "I heard: '%s'", msg->data.c_str());
+    RCLCPP_INFO(this->node_->get_logger(), "I heard: %s", msg->data.c_str());
 }
 
 void MainNode::workloop_timer_callback()
@@ -63,4 +70,6 @@ void MainNode::workloop_timer_callback()
     QString txt = QString("hello world (%1)").arg(this->count_++);
     message.data = txt.toStdString().c_str();
     this->publisher_->publish(message);
+
+    RCLCPP_INFO(this->node_->get_logger(), "Publish message: %s", message.data.c_str());
 }
