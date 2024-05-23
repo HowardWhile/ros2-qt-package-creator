@@ -24,6 +24,14 @@ find_package(std_msgs REQUIRED)
 find_package(Qt5 REQUIRED COMPONENTS Core Gui Widgets)
 
 # ------------------------------------------
+# Set include directories
+# ------------------------------------------
+include_directories(
+  ${CMAKE_CURRENT_SOURCE_DIR}/src
+#  ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+# ------------------------------------------
 # Add executable
 # ------------------------------------------
 add_executable(__NODE_NAME__ 
